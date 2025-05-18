@@ -6,11 +6,11 @@ document.querySelector('thead').addEventListener('click', (e) => {
   const columnIndex = [...tHead.querySelectorAll('th')].indexOf(e.target);
 
   const compare = (a, b) => {
-    if (a.innerText < b.innerText) {
+    if (a.comparedText < b.comparedText) {
       return -1;
     }
 
-    if (a.innerText > b.innerText) {
+    if (a.comparedText > b.comparedText) {
       return 1;
     }
 
@@ -18,7 +18,7 @@ document.querySelector('thead').addEventListener('click', (e) => {
   };
 
   [...tBody.querySelectorAll('tr')]
-    .map((row, index) => {
+    .map((row) => {
       let innerText = row.querySelectorAll('td')[columnIndex].innerText;
 
       innerText = innerText.match(/^[$]/)
@@ -26,9 +26,8 @@ document.querySelector('thead').addEventListener('click', (e) => {
         : innerText;
 
       return {
-        index: index,
         row: row,
-        innerText: innerText,
+        comparedText: innerText,
       };
     })
     .sort(compare)
